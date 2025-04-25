@@ -1,0 +1,94 @@
+//exercicio1
+//lista que recebe e remove nomes usando uma única string
+//vitor teixeira medina
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Pessoa {
+    char nome[100]; 
+    struct Pessoa *proxima;
+} Pessoa;
+
+
+Pessoa* novaPessoa(char *nome) {
+    Pessoa *nova = malloc(sizeof(Pessoa));
+    strncpy(nova->nome, nome, 100);
+    nova->nome[99] = '\0';
+    nova->proxima = NULL;
+    return nova;
+}
+
+void insereOrdem(Pessoa **head, Pessoa *inserir) {
+    Pessoa *aux = *head;
+ 
+    if (aux == NULL || strcmp(inserir->nome, aux->nome) < 0) {
+        inserir->proxima = aux;
+        *head = inserir;
+    } else {
+        while (aux->proxima != NULL && strcmp(inserir->nome, aux->proxima->nome) > 0) {
+            aux = aux->proxima;
+        }
+        inserir->proxima = aux->proxima;
+        aux->proxima = inserir;
+    }
+}
+
+void imprime(Pessoa *head) {
+    Pessoa *aux = head;
+    while (aux != NULL) {
+        printf("Nome: %s\n", aux->nome);
+        aux = aux->proxima;
+    }
+}
+
+int main() {
+
+    int a;
+    
+    printf("inserir na lista\n");
+    printf("remover da lista\n");
+    printf("mostrar lista\n");
+    scanf("%d", &a);
+    
+    switch(a){
+        case 1:
+        break;
+        case 2:
+        break;
+        case 3:
+
+        FILE *arquivo;
+    char nome[100];
+    Pessoa *head = NULL;
+    
+    arquivo = fopen("lista.txt", "r"); 
+
+    if (arquivo == NULL) {
+        exit(1);
+    } else {
+        while (fscanf(arquivo, "%99[^\n]\n", nome) != EOF) {
+            Pessoa *nova = novaPessoa(nome);
+            if (nova != NULL) {
+                insereOrdem(&head, nova); 
+            }
+        }
+
+        fclose(arquivo);
+    }
+
+    printf("lista\n");
+    imprime(head);
+
+    Pessoa *aux;
+    while (head != NULL) {
+        aux = head;
+        head = head->proxima;
+        free(aux);
+    }
+    default:
+    printf("erro");
+}
+    return 0;
+}
