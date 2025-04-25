@@ -2,6 +2,8 @@
 //lista que recebe e remove nomes usando uma única string
 //vitor teixeira medina
 
+//falta: conseguir escrever e ler no arquivo, quebrar os nomes na mesma string
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
