@@ -29,7 +29,7 @@ char* longestDiverseString(int a, int b, int c) {
 
     while (1) {
         sort(items, 3); \\ garantindo que o caractere com mais quantidade restante esteja em items[0].
-        int appended = 0;
+        int incluso = 0;
 
         // Percorre os 3 itens, do maior para o menor, guarda o tamanho atual da string, se a quantidade daquela letra acabou, pula para o próximo.
         // Se os dois últimos caracteres da string já forem iguais ao caractere que queremos adicionar, pulamos para o próximo.
@@ -44,11 +44,11 @@ char* longestDiverseString(int a, int b, int c) {
             result[len++] = items[i].ch;
             result[len] = '\0';
             items[i].count--;
-            appended = 1;
+            incluso = 1;
             break;
         }
 
-        if (!appended) break; // nenhum caractere foi adicionado porque violou a regra
+        if (!incluso) break; // nenhum caractere foi adicionado porque violou a regra
     }
 
     return result;
