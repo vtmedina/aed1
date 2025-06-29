@@ -4,7 +4,7 @@
 
 A string s is called happy if it satisfies the following conditions:
 
-S only contains the letters 'a', 'b', and 'c'.
+s only contains the letters 'a', 'b', and 'c'.
 s does not contain any of "aaa", "bbb", or "ccc" as a substring.
 s contains at most a occurrences of the letter 'a'.
 s contains at most b occurrences of the letter 'b'.
