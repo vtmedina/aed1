@@ -1,28 +1,29 @@
 # Vitor Teixeira Medina (M2)
 
-# 1763. Longest Nice Substring
+# 1405. Longest Happy String
 
-A string s is nice if, for every letter of the alphabet that s contains, it appears both in uppercase and lowercase. For example, "abABB" is nice because 'A' and 'a' appear, and 'B' and 'b' appear. However, "abA" is not because 'b' appears, but 'B' does not.
+A string s is called happy if it satisfies the following conditions:
 
-Given a string s, return the longest substring of s that is nice. If there are multiple, return the substring of the earliest occurrence. If there are none, return an empty string.
+s only contains the letters 'a', 'b', and 'c'.
+s does not contain any of "aaa", "bbb", or "ccc" as a substring.
+s contains at most a occurrences of the letter 'a'.
+s contains at most b occurrences of the letter 'b'.
+s contains at most c occurrences of the letter 'c'.
+Given three integers a, b, and c, return the longest possible happy string. If there are multiple longest happy strings, return any of them. If there is no such string, return the empty string "".
+
+A substring is a contiguous sequence of characters within a string.
 
 Example 1:
 
-Input: s = "YazaAay"
-Output: "aAa"
-Explanation: "aAa" is a nice string because 'A/a' is the only letter of the alphabet in s, and both 'A' and 'a' appear.
-"aAa" is the longest nice substring.
+Input: a = 1, b = 1, c = 7
+Output: "ccaccbcc"
+Explanation: "ccbccacc" would also be a correct answer.
 Example 2:
 
-Input: s = "Bb"
-Output: "Bb"
-Explanation: "Bb" is a nice string because both 'B' and 'b' appear. The whole string is a substring.
-Example 3:
-
-Input: s = "c"
-Output: ""
-Explanation: There are no nice substrings.
+Input: a = 7, b = 1, c = 0
+Output: "aabaa"
+Explanation: It is the only correct answer in this case.
  
 Constraints:
-1 <= s.length <= 100
-s consists of uppercase and lowercase English letters.
+0 <= a, b, c <= 100
+a + b + c > 0
