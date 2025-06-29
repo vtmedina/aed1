@@ -8,7 +8,8 @@ typedef struct {
     char ch;
 } Item;
 
-// função para ordenar um vetor de tamanho n de forma decrescente pelo count
+// função para ordenar um vetor de tamanho n de forma decrescente pelo count, o caractere com maior quantidade fica na frente
+// essa ordenação simula o comportamento de uma max-heap
 void sort(Item *arr, int n) {
     for(int i = 0; i < n-1; i++)
         for(int j = i+1; j < n; j++)
