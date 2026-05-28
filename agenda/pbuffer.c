@@ -59,14 +59,19 @@ int main() {
 }
 
 void adicionarPessoa() {
+    // começamos cada função apontando para o indice que organização dentro do buffer que queremos mexer
+    // *total aponta para o numero atual de pessoas e capacidade para o màximo que se pode ter
     int *total = (int *)pBuffer;
     int *capacidade = (int *)((char *)pBuffer + 4);
-    
+
+    // se o total tiver chegado na capacidade, a agenda não aceita mais ninguém
     if (*total >= *capacidade) {
         printf("Buffer cheio!\n");
         return;
     }
 
+    // do contrário calculamos a posição onde a nova pessoa vai ficar
+    // o calculo é pular os metadados e pular o total atual dentro do espaço onde já estão os outros nomes
     char *novaPessoa = (char *)pBuffer + sizeof(int) * 6 + (*total) * 84;
 
     printf("Nome: ");
@@ -88,6 +93,8 @@ void adicionarPessoa() {
 }
 
 void removerPessoa() {
+    // começamos cada função apontando para o indice que organização dentro do buffer que queremos mexer
+    // pulamos direto para o indice e verificamos se nçao está vazio
     int *total = (int *)pBuffer;
     int *indice = (int *)((char *)pBuffer + 16);
     if (*total == 0) {
@@ -95,6 +102,8 @@ void removerPessoa() {
         return;
     }
 
+    // se não estiver vazio vamos listar todos os nomes
+    // os nomes vão aparecer com o valor do indice
     listarPessoas();
     printf("Indice para remover (1-%d): ", *total);
 
@@ -104,7 +113,8 @@ void removerPessoa() {
         printf("Indice invalido!\n");
         return;
     }
-
+    
+    // sendo valido limpamos o espaço dentro do buffer onde aquele nome ficava
     char *alvo = (char *)pBuffer + sizeof(int) * 6 + (*indice-1) * 84;
     char *proxima = alvo + 84;
 
@@ -116,12 +126,15 @@ void removerPessoa() {
 }
 
 void buscarPessoa() {
+    // mais uma vez começando verificando a organização do buffer
+    // verificamos se não está vazio para prosseguir
     int *total = (int *)pBuffer;
     if (*total == 0) {
         printf("Nenhuma pessoa cadastrada!\n");
         return;
     }
 
+    // se não estiver vazio pulamos para o espaço que resevamos para buscar nomes
     char *nomeBusca = (char *)pBuffer + sizeof(int) * 6 + 84 * 5;
 
     printf("Nome para buscar: ");
@@ -131,6 +144,7 @@ void buscarPessoa() {
     int *encontrados = (int *)((char *)pBuffer + 16);
     *encontrados = 0;
 
+    // loop de busca: usa bytes 12-15 como índice do loop, compara o nome de cada pessoa com o nome buscado, se encontrar, exibe os dados
     int *indice = (int *)((char *)pBuffer + 12);
     for (*indice = 0; *indice < *total; (*indice)++) {
         char *pessoa = (char *)pBuffer + sizeof(int) * 6 + (*indice) * 84;
@@ -150,12 +164,16 @@ void buscarPessoa() {
 }
 
 void listarPessoas() {
+    // verificamos se a agenda não está vazia
     int *total = (int *)pBuffer;
     if (*total == 0) {
         printf("Nenhuma pessoa cadastrada!\n");
         return;
     }
 
+    // pulamos até o espaço onde reservamos pras pessoas
+    // percorre todas as pessoas cadastradas
+    // exibe os dados de cada uma formatados
     int *i = (int *)((char *)pBuffer + 12);
     for (*i = 0; *i < *total; (*i)++) {
         char *pessoa = (char *)pBuffer + sizeof(int) * 6 + (*i) * 84;
