@@ -12,12 +12,13 @@ void listarPessoas();
 int main() {
     // Alocando buffer de 6 inteiros + 5 pessoas (84 bytes cada) + 40 bytes para busca
     // Total: 6 * 4 + 5 * 84 + 40 = 24 + 420 + 40 = 484 bytes
+    // Lógica: 6 para metadados + 5 espaços para pessoas + 40 bytes pra buscar pessoas
     pBuffer = malloc(sizeof(int) * 6 + 84 * 5 + 40);
     if (!pBuffer) return 1;
 
     // Organizando o buffer
     *(int *)pBuffer = 0; // [0-3] total de pessoas                   
-    *(int *)((char *)pBuffer + 4) = 5; //[4-7] capacidade
+    *(int *)((char *)pBuffer + 4) = 5; //[4-7] total da capacidade
     *(int *)((char *)pBuffer + 8) = sizeof(int) * 6 + 84 * 5 + 40; // [8-11] tamanho total do buffer
     *(int *)((char *)pBuffer + 12) = 0; // [12-15] indice de busca  
     *(int *)((char *)pBuffer + 16) = 0; // [16-19] indice para remover  
